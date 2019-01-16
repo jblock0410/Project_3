@@ -28,29 +28,33 @@ document.getElementById('name').focus();
 
 // T-Shirt Info Section
     // If the "Theme-JS Puns" design is selected, make only the connected colors appear
+    // If the "This-I love JS" design is selected, make only the connected colors appear
+    
+    // Capture the 'design' div with the ID of 'design' in a const
     const sectionDesign = document.getElementById('design');
-
+    
     // Hide color option div on page load
          $('#colors-js-puns').hide();
     
-    sectionDesign.addEventListener('change', (e) => {
-        $('#colors-js-puns').hide();
+    // Change the 'Color' dropdown menu to match the 'Design' option selected
+    sectionDesign.addEventListener('change', (e) => {  
         let designOption = e.target.value;
+        $('#colors-js-puns').show();
             if (designOption === 'heart js') {
                 $('[value=cornflowerblue]').hide();
                 $('[value=darkslategrey]').hide();
                 $('[value=gold]').hide();
-            }   
-    });
-
-    sectionDesign.addEventListener('change', (e) => {
-        $('#colors-js-puns').hide();
-        let designColor = e.target.value; {  
-            if (designColor === 'js puns') {
+                $('[value=tomato]').show();
+                $('[value=steelblue]').show();
+                $('[value=dimgrey]').show();
+            }  else if (designOption === 'js puns') {
                 $('[value=tomato]').hide();
                 $('[value=steelblue]').hide();
                 $('[value=dimgrey]').hide();
-            }        
+                $('[value=cornflowerblue]').show();
+                $('[value=darkslategrey]').show();
+                $('[value=gold]').show();
+            } 
     });
 
     
@@ -58,8 +62,7 @@ document.getElementById('name').focus();
     
 
             
-  
-    // If the "This-I love JS" design is selected, make only the connected colors appear
+
 
 
 
