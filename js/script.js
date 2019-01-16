@@ -29,15 +29,14 @@ document.getElementById('name').focus();
 // T-Shirt Info Section
     // If the "Theme-JS Puns" design is selected, make only the connected colors appear
     const sectionDesign = document.getElementById('design');
-    const sectionColor = document.getElementById('color');
 
     // Hide color option div on page load
          $('#colors-js-puns').hide();
     
     sectionDesign.addEventListener('change', (e) => {
+        $('#colors-js-puns').hide();
         let designOption = e.target.value;
             if (designOption === 'heart js') {
-                $('#colors-js-puns').show();
                 $('[value=cornflowerblue]').hide();
                 $('[value=darkslategrey]').hide();
                 $('[value=gold]').hide();
@@ -45,9 +44,9 @@ document.getElementById('name').focus();
     });
 
     sectionDesign.addEventListener('change', (e) => {
-        let designColor = e.target.value;
-            if (designColor === 'js puns') {  
-                $('#colors-js-puns').show();   
+        $('#colors-js-puns').hide();
+        let designColor = e.target.value; {  
+            if (designColor === 'js puns') {
                 $('[value=tomato]').hide();
                 $('[value=steelblue]').hide();
                 $('[value=dimgrey]').hide();
