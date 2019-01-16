@@ -6,15 +6,18 @@ document.addEventListener('DOMContentLoaded', () => {
 document.getElementById('name').focus();
 
 
-// Job Role Section
-    // Added 'input field' text area directly into 'index.html' file with HTML per the instructions.  (good)
+
+
+
+// Job Role Section  (good)
+    // Added 'input field' text area directly into 'index.html' file with HTML per the instructions.  
         
-    // Hid above added 'input field' on page load 
+    // Hid above added 'input field' on page load  
         $('#other-title').hide();
 
-    // Function to reveal the 'input field' only when "Other" is selected in the "Job Role" dropdown
-         const section = document.getElementById('title');
-         section.addEventListener('change', (e) => {
+    // Function to reveal the 'input field' only when "Other" is selected in the "Job Role" dropdown  
+         const sectionJobRole = document.getElementById('title');
+         sectionJobRole.addEventListener('change', (e) => {
             let jobRoleOption = e.target.value;
                 if (jobRoleOption === 'other') {
                     $('#other-title').show();
@@ -26,11 +29,32 @@ document.getElementById('name').focus();
 
 
 
+
 // T-Shirt Info Section
     // If the "Theme-JS Puns" design is selected, make only the connected colors appear
+    const sectionDesign = document.getElementById('design');
+    const sectionColor = document.getElementById('color');
+    sectionDesign.addEventListener('change', (e) => {
+        let designOption = e.target.value;
 
+    });
+    
+    
+    
+    
+    
+    
+    
+        /*sectionDesign.addEventListener('change', (e) => {
+            let designSelection = e.target.textContent;
+                if $(designSelection:contains(&#9829).show()) {
+                    jsPun.show();
+                } else if (designSelection === "heart js") {
+                    loveJs.show();
+                }
+         });*/
 
-    // If the "This-I love JS" design is selected, make only the connect colors appear
+    // If the "This-I love JS" design is selected, make only the connected colors appear
 
 
 
