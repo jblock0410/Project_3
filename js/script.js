@@ -5,10 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
 // Set focus on the first text field ("name") on page load  (good)
 document.getElementById('name').focus();
 
-
-
-
-
 // Job Role Section  (good)
     // Added 'input field' text area directly into 'index.html' file with HTML per the instructions.  
         
@@ -34,26 +30,36 @@ document.getElementById('name').focus();
     // If the "Theme-JS Puns" design is selected, make only the connected colors appear
     const sectionDesign = document.getElementById('design');
     const sectionColor = document.getElementById('color');
+
+    // Hide color option div on page load
+         $('#colors-js-puns').hide();
+    
     sectionDesign.addEventListener('change', (e) => {
         let designOption = e.target.value;
-
+            if (designOption === 'heart js') {
+                $('#colors-js-puns').show();
+                $('[value=cornflowerblue]').hide();
+                $('[value=darkslategrey]').hide();
+                $('[value=gold]').hide();
+            }   
     });
-    
-    
-    
-    
-    
-    
-    
-        /*sectionDesign.addEventListener('change', (e) => {
-            let designSelection = e.target.textContent;
-                if $(designSelection:contains(&#9829).show()) {
-                    jsPun.show();
-                } else if (designSelection === "heart js") {
-                    loveJs.show();
-                }
-         });*/
 
+    sectionDesign.addEventListener('change', (e) => {
+        let designColor = e.target.value;
+            if (designColor === 'js puns') {  
+                $('#colors-js-puns').show();   
+                $('[value=tomato]').hide();
+                $('[value=steelblue]').hide();
+                $('[value=dimgrey]').hide();
+            }        
+    });
+
+    
+    
+    
+
+            
+  
     // If the "This-I love JS" design is selected, make only the connected colors appear
 
 
