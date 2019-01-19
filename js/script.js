@@ -8,7 +8,7 @@ document.getElementById('name').focus();
 // Job Role Section  (good)
     // Added 'input field' text area directly into 'index.html' file with HTML per the instructions.  
         
-    // Hid above added 'input field' on page load  
+    // Hide above added 'input field' on page load  
         $('#other-title').hide();
 
     // Function to reveal the 'input field' only when "Other" is selected in the "Job Role" dropdown  
@@ -29,35 +29,70 @@ document.getElementById('name').focus();
 // T-Shirt Info Section
     // If the "Theme-JS Puns" design is selected, make only the connected colors appear
     // If the "This-I love JS" design is selected, make only the connected colors appear
-    
-    // Capture the 'design' div with the ID of 'design' in a const
-    const sectionDesign = document.getElementById('design');
-    
+   
+    const colorOption = $('#colors-js-puns');
+    const designOption = $('#design');
     // Hide color option div on page load
-         $('#colors-js-puns').hide();
+         colorOption.hide();
     
     // Change the 'Color' dropdown menu to match the 'Design' option selected
-    sectionDesign.addEventListener('change', (e) => {  
-        let designOption = e.target.value;
-        $('#colors-js-puns').show();
-            if (designOption === 'heart js') {
-                $('[value=cornflowerblue]').hide();
-                $('[value=darkslategrey]').hide();
-                $('[value=gold]').hide();
-                $('[value=tomato]').show();
-                $('[value=steelblue]').show();
-                $('[value=dimgrey]').show();
-            }  else if (designOption === 'js puns') {
-                $('[value=tomato]').hide();
-                $('[value=steelblue]').hide();
-                $('[value=dimgrey]').hide();
-                $('[value=cornflowerblue]').show();
-                $('[value=darkslategrey]').show();
-                $('[value=gold]').show();
-            } 
-    });
-
+    $(designOption).change(function() {
+        if (designOption.val() === 'js puns') {
+            colorOption.show();
+            $('#color').val('cornflowerblue');
+            $('#color option[value="cornflowerblue"]').show();
+            $('#color option[value="darkslategrey"]').show();
+            $('#color option[value="gold"]').show();
+            $('#color option[value="tomato"]').hide();
+            $('#color option[value="steelblue"]').hide();
+            $('#color option[value="dimgrey"]').hide();
+        } else if (designOption.val() === 'heart js') {
+            colorOption.show();
+            $('#color').val('tomato');
+            $('#color option[value="cornflowerblue"]').hide();
+            $('#color option[value="darkslategrey"]').hide();
+            $('#color option[value="gold"]').hide();
+            $('#color option[value="tomato"]').show();
+            $('#color option[value="steelblue"]').show();
+            $('#color option[value="dimgrey"]').show();
+        } else if (designOption.val() === 'selectTheme') {
+            colorOption.hide();
+        }
+   });
     
+    
+    
+    
+    
+    
+    /*
+    designOption.addEventListener('change', (e) => {  
+        let $designOption = e.target.value;
+        let $sectioncolor = $('#color');
+            if ($designOption === 'heart js') {
+                colorDiv.show();
+                $sectioncolor.val('tomato').hide();
+                $sectioncolor.val('darkslategrey').hide();
+                $sectioncolor.val('gold').hide();
+                $sectioncolor.val('tomato');
+            } else if (designOption === 'js puns') {
+                $('#colors-js-puns').show();
+                $('[value=tomato]').hide()
+                $('[value=steelblue]').hide();
+                $('[value=dimgrey]').hide();  
+            }
+        });
+    */
+
+    //const sectionColorDiv = document.getElementById('color');
+    /*
+    resetColorSelection.addEventListener('change', (e) => {
+        let colorOption = e.target.value;
+        if  (colorOption === '[value=]'){}
+
+    });
+    */
+
     
     
 
