@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+//document.addEventListener('DOMContentLoaded', () => {
 // ******************************************************
 
 
@@ -26,17 +26,17 @@ document.getElementById('name').focus();
 
 
 
-// T-Shirt Info Section
-    // If the "Theme-JS Puns" design is selected, make only the connected colors appear
-    // If the "This-I love JS" design is selected, make only the connected colors appear
-   
+// T-Shirt Info Section (good)
     const colorOption = $('#colors-js-puns');
     const designOption = $('#design');
-    // Hide color option div on page load
+
+    // Hide the 'Color' dropdown menu on page load
          colorOption.hide();
     
-    // Change the 'Color' dropdown menu to match the 'Design' option selected
+    // Reveals the 'Color' dropdown menu when the 'js puns' or 'heart js' 'Design' option is selected      
+    // Changes the 'Color' dropdown menu to match the respective 'Design' option selected
     $(designOption).change(function() {
+        // When the 'js puns' option is selected
         if (designOption.val() === 'js puns') {
             colorOption.show();
             $('#color').val('cornflowerblue');
@@ -46,6 +46,7 @@ document.getElementById('name').focus();
             $('#color option[value="tomato"]').hide();
             $('#color option[value="steelblue"]').hide();
             $('#color option[value="dimgrey"]').hide();
+        // When the 'heart js' option is selected    
         } else if (designOption.val() === 'heart js') {
             colorOption.show();
             $('#color').val('tomato');
@@ -55,57 +56,38 @@ document.getElementById('name').focus();
             $('#color option[value="tomato"]').show();
             $('#color option[value="steelblue"]').show();
             $('#color option[value="dimgrey"]').show();
+        // Hides the 'Color' dropdown menu when the 'selectTheme' option is selected
         } else if (designOption.val() === 'selectTheme') {
             colorOption.hide();
         }
    });
     
     
-    
-    
-    
-    
-    /*
-    designOption.addEventListener('change', (e) => {  
-        let $designOption = e.target.value;
-        let $sectioncolor = $('#color');
-            if ($designOption === 'heart js') {
-                colorDiv.show();
-                $sectioncolor.val('tomato').hide();
-                $sectioncolor.val('darkslategrey').hide();
-                $sectioncolor.val('gold').hide();
-                $sectioncolor.val('tomato');
-            } else if (designOption === 'js puns') {
-                $('#colors-js-puns').show();
-                $('[value=tomato]').hide()
-                $('[value=steelblue]').hide();
-                $('[value=dimgrey]').hide();  
-            }
-        });
-    */
-
-    //const sectionColorDiv = document.getElementById('color');
-    /*
-    resetColorSelection.addEventListener('change', (e) => {
-        let colorOption = e.target.value;
-        if  (colorOption === '[value=]'){}
-
-    });
-    */
-
-    
-    
-
-            
-
-
-
 
 
 
 // Register for Activities Section
-    // When activities are selected, set it so the conflicting activites are disable checkbox and visually indicate the workshop is not available
+    // When activities are selected, set it so the conflicting activites' checkbox is unavailable and visually indicate the workshop is not available
+    
+    // Selects the checkboxes for each activity
+    const mainConference = $('.activities input[name="all"]'); 
+    const javascriptFrameworks = $('.activities input[name="js-frameworks"]');
+    const javascriptLibraries = $('.activities input[name="js-libs"]');
+    const express = $('.activities input[name="express"]');
+    const node = $('.activities input[name="node"]');
+    const buildTools = $('.activities input[name="build-tools"]');
+    const npm = $('.activities input[name="npm"]');
+    // This is how to disable the checkbox (delete)
+    mainConference.prop('disabled', true); // disable the checkbox
+    
 
+    // Selects the label text for each of the activity options
+    const activitiesLabel = $('.activities label');  
+    // This is how to gray out the text of each activity (delete)
+    activitiesLabel[1].style.color = 'gray';  
+    activitiesLabel[0].style.color = 'gray';  
+    
+    
 
     // Remove conflicting designation (if any) when a checkbox is unchecked
 
@@ -223,4 +205,4 @@ document.getElementById('name').focus();
 
 
 // Ending (delete)
-}); 
+//}); 
