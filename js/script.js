@@ -71,7 +71,6 @@ document.getElementById('name').focus();
 
 
 // Register for Activities Section
-    // When activities are selected, set it so the conflicting activites' checkbox is unavailable and visually indicate the workshop is not available
     
     // Selects the checkboxes for each activity (good)
     const mainConference = $('.activities input[name="all"]'); 
@@ -83,7 +82,7 @@ document.getElementById('name').focus();
     const npm = $('.activities input[name="npm"]');
 
 
-    // Selects the label text for each of the activity options 
+    // Selects the label text for each of the activity options (good)
     const activitiesLabel = $('.activities label'); 
 
     // This is how to check is a specific box is checked (delete)
@@ -96,54 +95,45 @@ document.getElementById('name').focus();
     // activitiesLabel[1].style.color = 'gray';  
 
 
-
-    
-    // Selects the checkboxes 
+ 
+    // When activities are selected, set it so the conflicting activites' checkbox is unavailable and visually indicate the workshop is not available (good)
     const checkedBoxSearch = $('.activities [type=checkbox]');
-    checkedBoxSearch.addEventListener('click', (e) => {
-        let checkedBox = e.target.value;
-
+    checkedBoxSearch.on('click', () => {
+        if ($(javascriptFrameworks).prop('checked')) {
+            express.prop('disabled', true);
+            activitiesLabel[3].style.color = 'gray';
+        } if ($(javascriptLibraries).prop('checked'))  {
+            node.prop('disabled', true);
+            activitiesLabel[4].style.color = 'gray';
+        } if ($(express).prop('checked')) {
+            javascriptFrameworks.prop('disabled', true);
+            activitiesLabel[1].style.color = 'gray';
+        } if ($(node).prop('checked')) {
+            javascriptLibraries.prop('disabled', true);
+            activitiesLabel[2].style.color = 'gray';
+        } 
     });
-    
-
-    // Set conditionals for activity conflicts
-    if ($(javascriptFrameworks).prop('checked')) {
-        express.prop('disabled', true);
-        activitiesLabel[3].style.color = 'gray';
-    } 
-
-    if ($(javascriptLibraries).prop('checked'))  {
-        node.prop('disabled', true);
-        activitiesLabel[4].style.color = 'gray';
-    } 
-    if ($(express).prop('checked')) {
-        javascriptFrameworks.prop('disabled', true);
-        activitiesLabel[1].style.color = 'gray';
-    } 
-    if ($(node).prop('checked')) {
-        javascriptLibraries.prop('disabled', true);
-        activitiesLabel[2].style.color = 'gray';
-    }
-
-
-
-    //javascriptFrameworks [1]
-    //express [3]
-
-    //javascriptLibraries [2]
-    //node [4]
-
-    //express [3]
-    //javascriptFrameworks [1]
-    
-    //node [4]
-    //javascriptLibraries [2]
-
-
-   
-
 
     // Remove conflicting designation (if any) when a checkbox is unchecked
+    const uncheck = $('.activities [type=checkbox]');
+        uncheck.off('click', () => {
+        if ($(javascriptFrameworks).prop('checked')) {
+            express.prop('disabled', false);
+            activitiesLabel[3].style.color = 'black';
+        }  if ($(javascriptLibraries).prop('checked'))  {
+            node.prop('disabled', true);
+            activitiesLabel[4].style.color = 'gray';
+        } if ($(express).prop('checked')) {
+            javascriptFrameworks.prop('disabled', true);
+            activitiesLabel[1].style.color = 'gray';
+        } if ($(node).prop('checked')) {
+            javascriptLibraries.prop('disabled', true);
+            activitiesLabel[2].style.color = 'gray';
+        } 
+    });
+
+
+
 
 
     // Keep a running total of checked boxes so the total $ amount updates based upon selections
