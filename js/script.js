@@ -11,6 +11,9 @@ document.getElementById('name').focus();
     // Hide above added 'input field' on page load  
         $('#other-title').hide();
 
+
+
+
     // Function to reveal the 'input field' only when "Other" is selected in the "Job Role" dropdown  
          const sectionJobRole = document.getElementById('title');
          sectionJobRole.addEventListener('change', (e) => {
@@ -32,6 +35,7 @@ document.getElementById('name').focus();
 
     // Hide the 'Color' dropdown menu on page load
          colorOption.hide();
+        
     
     // Reveals the 'Color' dropdown menu when the 'js puns' or 'heart js' 'Design' option is selected      
     // Changes the 'Color' dropdown menu to match the respective 'Design' option selected
@@ -69,7 +73,7 @@ document.getElementById('name').focus();
 // Register for Activities Section
     // When activities are selected, set it so the conflicting activites' checkbox is unavailable and visually indicate the workshop is not available
     
-    // Selects the checkboxes for each activity
+    // Selects the checkboxes for each activity (good)
     const mainConference = $('.activities input[name="all"]'); 
     const javascriptFrameworks = $('.activities input[name="js-frameworks"]');
     const javascriptLibraries = $('.activities input[name="js-libs"]');
@@ -77,10 +81,13 @@ document.getElementById('name').focus();
     const node = $('.activities input[name="node"]');
     const buildTools = $('.activities input[name="build-tools"]');
     const npm = $('.activities input[name="npm"]');
-    
-    // Selects the label text for each of the activity options
+
+
+    // Selects the label text for each of the activity options 
     const activitiesLabel = $('.activities label'); 
 
+    // This is how to check is a specific box is checked (delete)
+    // $(mainConference).prop('checked');
 
     // This is how to disable the checkbox (delete)
     // mainConference.prop('disabled', true); // disable the checkbox
@@ -88,22 +95,49 @@ document.getElementById('name').focus();
     // This is how to gray out the text of each activity (delete)
     // activitiesLabel[1].style.color = 'gray';  
 
-    // This is how to check is a specific box is checked (delete)
-    // $(mainConference).prop('checked');
 
-   
 
-    javascriptFrameworks
-    express
-
-    javascriptLibraries
-    node
-
-    express
-    javascriptFrameworks
     
-    node
-    javascriptLibraries
+    // Selects the checkboxes 
+    const checkedBoxSearch = $('.activities [type=checkbox]');
+    checkedBoxSearch.addEventListener('click', (e) => {
+        let checkedBox = e.target.value;
+
+    });
+    
+
+    // Set conditionals for activity conflicts
+    if ($(javascriptFrameworks).prop('checked')) {
+        express.prop('disabled', true);
+        activitiesLabel[3].style.color = 'gray';
+    } 
+
+    if ($(javascriptLibraries).prop('checked'))  {
+        node.prop('disabled', true);
+        activitiesLabel[4].style.color = 'gray';
+    } 
+    if ($(express).prop('checked')) {
+        javascriptFrameworks.prop('disabled', true);
+        activitiesLabel[1].style.color = 'gray';
+    } 
+    if ($(node).prop('checked')) {
+        javascriptLibraries.prop('disabled', true);
+        activitiesLabel[2].style.color = 'gray';
+    }
+
+
+
+    //javascriptFrameworks [1]
+    //express [3]
+
+    //javascriptLibraries [2]
+    //node [4]
+
+    //express [3]
+    //javascriptFrameworks [1]
+    
+    //node [4]
+    //javascriptLibraries [2]
 
 
    
