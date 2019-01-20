@@ -77,17 +77,37 @@ document.getElementById('name').focus();
     const node = $('.activities input[name="node"]');
     const buildTools = $('.activities input[name="build-tools"]');
     const npm = $('.activities input[name="npm"]');
-    // This is how to disable the checkbox (delete)
-    mainConference.prop('disabled', true); // disable the checkbox
     
-
     // Selects the label text for each of the activity options
-    const activitiesLabel = $('.activities label');  
+    const activitiesLabel = $('.activities label'); 
+
+
+    // This is how to disable the checkbox (delete)
+    // mainConference.prop('disabled', true); // disable the checkbox
+    
     // This is how to gray out the text of each activity (delete)
-    activitiesLabel[1].style.color = 'gray';  
-    activitiesLabel[0].style.color = 'gray';  
+    // activitiesLabel[1].style.color = 'gray';  
+
+    // This is how to check is a specific box is checked (delete)
+    // $(mainConference).prop('checked');
+
+   
+
+    javascriptFrameworks
+    express
+
+    javascriptLibraries
+    node
+
+    express
+    javascriptFrameworks
     
-    
+    node
+    javascriptLibraries
+
+
+   
+
 
     // Remove conflicting designation (if any) when a checkbox is unchecked
 
