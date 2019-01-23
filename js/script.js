@@ -15,8 +15,8 @@ document.getElementById('name').focus();
 
 
     // Function to reveal the 'input field' only when "Other" is selected in the "Job Role" dropdown  
-         const sectionJobRole = document.getElementById('title');
-         sectionJobRole.addEventListener('change', (e) => {
+         const $sectionJobRole = document.getElementById('title');
+         $sectionJobRole.addEventListener('change', (e) => {
             let jobRoleOption = e.target.value;
                 if (jobRoleOption === 'other') {
                     $('#other-title').show();
@@ -30,19 +30,19 @@ document.getElementById('name').focus();
 
 
 // T-Shirt Info Section (good)
-    const colorOption = $('#colors-js-puns');
-    const designOption = $('#design');
+    const $colorOption = $('#colors-js-puns');
+    const $designOption = $('#design');
 
     // Hide the 'Color' dropdown menu on page load
-         colorOption.hide();
+         $colorOption.hide();
         
     
     // Reveals the 'Color' dropdown menu when the 'js puns' or 'heart js' 'Design' option is selected      
     // Changes the 'Color' dropdown menu to match the respective 'Design' option selected
-    $(designOption).change(function() {
+    $($designOption).change(function() {
         // When the 'js puns' option is selected
-        if (designOption.val() === 'js puns') {
-            colorOption.show();
+        if ($designOption.val() === 'js puns') {
+            $colorOption.show();
             $('#color').val('cornflowerblue');
             $('#color option[value="cornflowerblue"]').show();
             $('#color option[value="darkslategrey"]').show();
@@ -51,8 +51,8 @@ document.getElementById('name').focus();
             $('#color option[value="steelblue"]').hide();
             $('#color option[value="dimgrey"]').hide();
         // When the 'heart js' option is selected    
-        } else if (designOption.val() === 'heart js') {
-            colorOption.show();
+        } else if ($designOption.val() === 'heart js') {
+            $colorOption.show();
             $('#color').val('tomato');
             $('#color option[value="cornflowerblue"]').hide();
             $('#color option[value="darkslategrey"]').hide();
@@ -61,8 +61,8 @@ document.getElementById('name').focus();
             $('#color option[value="steelblue"]').show();
             $('#color option[value="dimgrey"]').show();
         // Hides the 'Color' dropdown menu when the 'selectTheme' option is selected
-        } else if (designOption.val() === 'selectTheme') {
-            colorOption.hide();
+        } else if ($designOption.val() === 'selectTheme') {
+            $colorOption.hide();
         }
    });
     
@@ -70,76 +70,129 @@ document.getElementById('name').focus();
 
 
 
-// Register for Activities Section
-    
+// Registration for Activities Section
+
     // Selects the checkboxes for each activity (good)
-    const mainConference = $('.activities input[name="all"]'); 
-    const javascriptFrameworks = $('.activities input[name="js-frameworks"]');
-    const javascriptLibraries = $('.activities input[name="js-libs"]');
-    const express = $('.activities input[name="express"]');
-    const node = $('.activities input[name="node"]');
-    const buildTools = $('.activities input[name="build-tools"]');
-    const npm = $('.activities input[name="npm"]');
+    const $mainConference = $('.activities input[name="all"]');
+    const $javascriptFrameworks = $('.activities input[name="js-frameworks"]');
+    const $javascriptLibraries = $('.activities input[name="js-libs"]');
+    const $express = $('.activities input[name="express"]');
+    const $node = $('.activities input[name="node"]');
+    const $buildTools = $('.activities input[name="build-tools"]');
+    const $npm = $('.activities input[name="npm"]');
 
 
     // Selects the label text for each of the activity options (good)
     const activitiesLabel = $('.activities label'); 
 
-    // This is how to check is a specific box is checked (delete)
-    // $(mainConference).prop('checked');
-
-    // This is how to disable the checkbox (delete)
-    // mainConference.prop('disabled', true); // disable the checkbox
     
-    // This is how to gray out the text of each activity (delete)
-    // activitiesLabel[1].style.color = 'gray';  
+
+/****************** */
 
 
- 
-    // When activities are selected, set it so the conflicting activites' checkbox is unavailable and visually indicate the workshop is not available (good)
+
+
+/********************** */
+
+    // For the 'if' statements, when an activity is selected, sets it so the conflicting activity's checkbox is unavailable and visually indicates the workshop is not available (good)
+    // For the 'else' statements, unmarks the conflicting activites when the respective conflicting activity is unchecked (good)
     const checkedBoxSearch = $('.activities [type=checkbox]');
     checkedBoxSearch.on('click', () => {
-        if ($(javascriptFrameworks).prop('checked')) {
-            express.prop('disabled', true);
+
+        if ($($mainConference).prop('checked')) {
+
+        } else {
+
+        }
+        
+        if ($($javascriptFrameworks).prop('checked')) {
+            $express.prop('disabled', true);
             activitiesLabel[3].style.color = 'gray';
-        } if ($(javascriptLibraries).prop('checked'))  {
-            node.prop('disabled', true);
-            activitiesLabel[4].style.color = 'gray';
-        } if ($(express).prop('checked')) {
-            javascriptFrameworks.prop('disabled', true);
-            activitiesLabel[1].style.color = 'gray';
-        } if ($(node).prop('checked')) {
-            javascriptLibraries.prop('disabled', true);
-            activitiesLabel[2].style.color = 'gray';
-        } 
-    });
-
-    // Remove conflicting designation (if any) when a checkbox is unchecked
-    const uncheck = $('.activities [type=checkbox]');
-        uncheck.off('click', () => {
-        if ($(javascriptFrameworks).prop('checked')) {
-            express.prop('disabled', false);
+            
+        } else {
+            $express.prop('disabled', false);
             activitiesLabel[3].style.color = 'black';
-        }  if ($(javascriptLibraries).prop('checked'))  {
-            node.prop('disabled', true);
+            
+            
+        }
+        
+        if ($($javascriptLibraries).prop('checked'))  {
+            $node.prop('disabled', true);
             activitiesLabel[4].style.color = 'gray';
-        } if ($(express).prop('checked')) {
-            javascriptFrameworks.prop('disabled', true);
+            
+        } else {
+            $node.prop('disabled', false);
+            activitiesLabel[4].style.color = 'black';
+            
+        }
+        
+        if ($($express).prop('checked')) {
+            $javascriptFrameworks.prop('disabled', true);
             activitiesLabel[1].style.color = 'gray';
-        } if ($(node).prop('checked')) {
-            javascriptLibraries.prop('disabled', true);
+            
+        } else {
+            $javascriptFrameworks.prop('disabled', false);
+            activitiesLabel[1].style.color = 'black';
+           
+        }
+        
+        if ($($node).prop('checked')) {
+            $javascriptLibraries.prop('disabled', true);
             activitiesLabel[2].style.color = 'gray';
-        } 
+            
+        } else {
+            $javascriptLibraries.prop('disabled', false);
+            activitiesLabel[2].style.color = 'black';
+            
+        }
+
+        if ($($buildTools).prop('checked')) {
+           
+        } else {
+           
+        }
+
+        if ($($npm).prop('checked')) {
+          
+        }else {
+            
+        }
     });
-
-
 
 
 
     // Keep a running total of checked boxes so the total $ amount updates based upon selections
+    // Select the dynamically added h3 element to display the running total cost
+    let $runningTotal = $('.totalRunningCost').text('Total: $ ');
+    $runningTotal.hide();
+    //const $totalCost = $runningTotal.textContent;
+
+    // Select dollar amounts for each activity
+    const mainConferenceTotal = parseInt('200');
+    const frameworksTotal = parseInt('100');
+    const librariesTotal = parseInt('100');
+    const expressTotal = parseInt('100');
+    const nodeTotal = parseInt('100');
+    const buildToolsTotal = parseInt('100');
+    const npmTotal = parseInt('100');
+
+    /*
+    function runningTotal() {
+        let $activitiesCheckbox = $('.activities input[name="[i]"]');
+        for (let i = 0; i < $activitiesCheckbox.length; i++) {
+            if ($activitiesCheckbox[i].prop('checked')) {
+                $runningTotal.show();
+            }
+        }
+    }
+    */
+
+    
 
 
 
+
+    
 
 
 // Payment Info Section
@@ -147,7 +200,7 @@ document.getElementById('name').focus();
 
 
     // Make credit card option the default
-    // Display the #credit-card div, and hide the PayPal and Bitcoin info.
+    // Display the #credit-card div, and hide the PayPal and Bitcoin info
 
 
     // Make PayPal info display when selected, hide others
