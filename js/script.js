@@ -12,8 +12,6 @@ document.getElementById('name').focus();
         $('#other-title').hide();
 
 
-
-
     // Function to reveal the 'input field' only when "Other" is selected in the "Job Role" dropdown  
          const $sectionJobRole = document.getElementById('title');
          $sectionJobRole.addEventListener('change', (e) => {
@@ -89,26 +87,35 @@ document.getElementById('name').focus();
 
 /****************** */
 
-
-
-
 /********************** */
 
     // For the 'if' statements, when an activity is selected, sets it so the conflicting activity's checkbox is unavailable and visually indicates the workshop is not available (good)
     // For the 'else' statements, unmarks the conflicting activites when the respective conflicting activity is unchecked (good)
-    const checkedBoxSearch = $('.activities [type=checkbox]');
-    checkedBoxSearch.on('click', () => {
+    const $checkedBoxSearch = $('.activities [type=checkbox]'); //???
+ 
+    const mainConferenceCost = 200;
+    const workshopCost = 100;
+    const h3 = document.createElement('h3');
+    const activities = document.querySelector('.activities');
+    activities.appendChild(h3);
+    $(h3).hide();
+    let $runningTotal = [];
+    
 
+    $checkedBoxSearch.on('click', () => {
+        
         if ($($mainConference).prop('checked')) {
-
+            $(h3).show();
+            $runningTotal.push(mainConferenceCost);
+            h3.textContent = 'Total: $' + $runningTotal;
         } else {
-
+            $(h3).hide();
         }
         
         if ($($javascriptFrameworks).prop('checked')) {
             $express.prop('disabled', true);
             activitiesLabel[3].style.color = 'gray';
-            
+            $(h3).show();
         } else {
             $express.prop('disabled', false);
             activitiesLabel[3].style.color = 'black';
@@ -119,7 +126,7 @@ document.getElementById('name').focus();
         if ($($javascriptLibraries).prop('checked'))  {
             $node.prop('disabled', true);
             activitiesLabel[4].style.color = 'gray';
-            
+            $(h3).show();
         } else {
             $node.prop('disabled', false);
             activitiesLabel[4].style.color = 'black';
@@ -129,7 +136,7 @@ document.getElementById('name').focus();
         if ($($express).prop('checked')) {
             $javascriptFrameworks.prop('disabled', true);
             activitiesLabel[1].style.color = 'gray';
-            
+            $(h3).show();
         } else {
             $javascriptFrameworks.prop('disabled', false);
             activitiesLabel[1].style.color = 'black';
@@ -139,23 +146,23 @@ document.getElementById('name').focus();
         if ($($node).prop('checked')) {
             $javascriptLibraries.prop('disabled', true);
             activitiesLabel[2].style.color = 'gray';
-            
+            $(h3).show();
         } else {
             $javascriptLibraries.prop('disabled', false);
             activitiesLabel[2].style.color = 'black';
-            
+          
         }
 
         if ($($buildTools).prop('checked')) {
-           
+            $(h3).show();
         } else {
-           
+     
         }
 
         if ($($npm).prop('checked')) {
-          
-        }else {
-            
+            $(h3).show();
+        } else {
+        
         }
     });
 
@@ -163,31 +170,10 @@ document.getElementById('name').focus();
 
     // Keep a running total of checked boxes so the total $ amount updates based upon selections
     // Select the dynamically added h3 element to display the running total cost
-    let $runningTotal = $('.totalRunningCost').text('Total: $ ');
-    $runningTotal.hide();
-    //const $totalCost = $runningTotal.textContent;
-
-    // Select dollar amounts for each activity
-    const mainConferenceTotal = parseInt('200');
-    const frameworksTotal = parseInt('100');
-    const librariesTotal = parseInt('100');
-    const expressTotal = parseInt('100');
-    const nodeTotal = parseInt('100');
-    const buildToolsTotal = parseInt('100');
-    const npmTotal = parseInt('100');
-
-    /*
-    function runningTotal() {
-        let $activitiesCheckbox = $('.activities input[name="[i]"]');
-        for (let i = 0; i < $activitiesCheckbox.length; i++) {
-            if ($activitiesCheckbox[i].prop('checked')) {
-                $runningTotal.show();
-            }
-        }
-    }
-    */
-
     
+
+
+
 
 
 
@@ -303,3 +289,10 @@ document.getElementById('name').focus();
 
 // Ending (delete)
 //}); 
+
+
+
+
+
+// const parseInt the remaining checkboxes
+// h3.textContent += parseInt const
