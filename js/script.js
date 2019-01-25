@@ -3,14 +3,14 @@
 
 
 // Set focus on the first text field ("name") on page load  (good)
-document.getElementById('name').focus();
+$('#name').focus();
+
+
 
 // Job Role Section  (good)
-    // Added 'input field' text area directly into 'index.html' file with HTML per the instructions.  
-        
+    // Added 'input field' text area directly into 'index.html' file with HTML per the instructions.     
     // Hide above added 'input field' on page load  
         $('#other-title').hide();
-
 
     // Function to reveal the 'input field' only when "Other" is selected in the "Job Role" dropdown  
          const $sectionJobRole = document.getElementById('title');
@@ -22,8 +22,8 @@ document.getElementById('name').focus();
                     $('#other-title').hide();
                 }
          });
-        
 
+         
 
 
 
@@ -83,86 +83,44 @@ document.getElementById('name').focus();
     // Selects the label text for each of the activity options (good)
     const activitiesLabel = $('.activities label'); 
 
-    
-
-/****************** */
-
-/********************** */
 
     // For the 'if' statements, when an activity is selected, sets it so the conflicting activity's checkbox is unavailable and visually indicates the workshop is not available (good)
     // For the 'else' statements, unmarks the conflicting activites when the respective conflicting activity is unchecked (good)
-    const $checkedBoxSearch = $('.activities [type=checkbox]'); //???
- 
-    const mainConferenceCost = 200;
-    const workshopCost = 100;
-    const h3 = document.createElement('h3');
-    const activities = document.querySelector('.activities');
-    activities.appendChild(h3);
-    $(h3).hide();
-    let $runningTotal = [];
     
+    const $checkedBoxSearch = $('.activities [type=checkbox]'); 
 
     $checkedBoxSearch.on('click', () => {
-        
-        if ($($mainConference).prop('checked')) {
-            $(h3).show();
-            $runningTotal.push(mainConferenceCost);
-            h3.textContent = 'Total: $' + $runningTotal;
-        } else {
-            $(h3).hide();
-        }
         
         if ($($javascriptFrameworks).prop('checked')) {
             $express.prop('disabled', true);
             activitiesLabel[3].style.color = 'gray';
-            $(h3).show();
         } else {
             $express.prop('disabled', false);
-            activitiesLabel[3].style.color = 'black';
-            
-            
+            activitiesLabel[3].style.color = 'black';   
         }
         
         if ($($javascriptLibraries).prop('checked'))  {
             $node.prop('disabled', true);
             activitiesLabel[4].style.color = 'gray';
-            $(h3).show();
         } else {
             $node.prop('disabled', false);
-            activitiesLabel[4].style.color = 'black';
-            
+            activitiesLabel[4].style.color = 'black';  
         }
         
         if ($($express).prop('checked')) {
             $javascriptFrameworks.prop('disabled', true);
             activitiesLabel[1].style.color = 'gray';
-            $(h3).show();
         } else {
             $javascriptFrameworks.prop('disabled', false);
             activitiesLabel[1].style.color = 'black';
-           
         }
         
         if ($($node).prop('checked')) {
             $javascriptLibraries.prop('disabled', true);
             activitiesLabel[2].style.color = 'gray';
-            $(h3).show();
         } else {
             $javascriptLibraries.prop('disabled', false);
             activitiesLabel[2].style.color = 'black';
-          
-        }
-
-        if ($($buildTools).prop('checked')) {
-            $(h3).show();
-        } else {
-     
-        }
-
-        if ($($npm).prop('checked')) {
-            $(h3).show();
-        } else {
-        
         }
     });
 
@@ -171,9 +129,14 @@ document.getElementById('name').focus();
     // Keep a running total of checked boxes so the total $ amount updates based upon selections
     // Select the dynamically added h3 element to display the running total cost
     
+    const activities = $('.activities');
+    const $h3 = document.createElement('h3');
+    activities.appendChild($h3);
+    $h3.textContent = 'Total';
 
 
-
+    const mainConferenceCost = 200;
+    const workshopCost = 100;
 
 
 
@@ -290,9 +253,3 @@ document.getElementById('name').focus();
 // Ending (delete)
 //}); 
 
-
-
-
-
-// const parseInt the remaining checkboxes
-// h3.textContent += parseInt const
