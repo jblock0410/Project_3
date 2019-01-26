@@ -129,15 +129,48 @@ $('#name').focus();
     // Keep a running total of checked boxes so the total $ amount updates based upon selections
     // Select the dynamically added h3 element to display the running total cost
     
-    const activities = $('.activities');
+    
+    const activities = document.querySelector('.activities');
     const $h3 = document.createElement('h3');
     activities.appendChild($h3);
-    $h3.textContent = 'Total';
-
-
+    let $runningTotal = [];
     const mainConferenceCost = 200;
     const workshopCost = 100;
+    
+    $checkedBoxSearch.on('click', () => {
+        
+        if ($($mainConference).prop('checked')) {
+            $runningTotal.push(mainConferenceCost);
+            $h3.innerHTML = 'Total: $' + $runningTotal;
+        } else {
+            $runningTotal.pop(mainConferenceCost);
+            $h3.innerHTML = 'Total: $' + $runningTotal; 
+        }
 
+        if ($($javascriptFrameworks).prop('checked')) {
+            $runningTotal.push(workshopCost);
+            $h3.innerHTML = 'Total: $' + $runningTotal;
+        } else {
+            $runningTotal.pop(workshopCost);
+            $h3.innerHTML = 'Total: $' + $runningTotal; 
+        }
+        
+    });
+    
+    function sumTotal (total, num) {
+        return total + num;
+    }
+
+    function finalTotal() {
+        $h3.innerHTML = $runningTotal.reduce(sumTotal);
+    }
+    
+    
+  
+    
+    
+    
+   
 
 
 
