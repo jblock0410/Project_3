@@ -133,38 +133,37 @@ $('#name').focus();
     const activities = document.querySelector('.activities');
     const $h3 = document.createElement('h3');
     activities.appendChild($h3);
-    let $runningTotal = [];
+
+
+    // Function to capture running total in an array and display real-time total cost
+    let $runningTotal = [0];
     const mainConferenceCost = 200;
     const workshopCost = 100;
+    const totalCost = (accumulator, currentValue) => accumulator + currentValue;
+    const totalCostAdjust = (accumulator, currentValue) => accumulator - currentValue;
     
     $checkedBoxSearch.on('click', () => {
         
         if ($($mainConference).prop('checked')) {
-            $runningTotal.push(mainConferenceCost);
-            $h3.innerHTML = 'Total: $' + $runningTotal;
+            accumulator = $runningTotal.push(mainConferenceCost);
+            currentValue = $runningTotal;
+            console.log('Total: $' + $runningTotal.reduce(totalCost));
         } else {
             $runningTotal.pop(mainConferenceCost);
-            $h3.innerHTML = 'Total: $' + $runningTotal; 
+            console.log('Total: $' + $runningTotal.reduce(totalCostAdjust)); 
         }
 
+        /*
         if ($($javascriptFrameworks).prop('checked')) {
-            $runningTotal.push(workshopCost);
-            $h3.innerHTML = 'Total: $' + $runningTotal;
+            currentValue = $runningTotal.push(workshopCost);
+            console.log('Total: $' + $runningTotal.reduce(totalCost));
         } else {
             $runningTotal.pop(workshopCost);
-            $h3.innerHTML = 'Total: $' + $runningTotal; 
+            console.log('Total: $' + $runningTotal.reduce(totalCostAdjust)); 
         }
-        
+        */
     });
-    
-    function sumTotal (total, num) {
-        return total + num;
-    }
 
-    function finalTotal() {
-        $h3.innerHTML = $runningTotal.reduce(sumTotal);
-    }
-    
     
   
     
