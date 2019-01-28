@@ -86,20 +86,35 @@ $('#name').focus();
 
     // For the 'if' statements, when an activity is selected, sets it so the conflicting activity's checkbox is unavailable and visually indicates the workshop is not available (good)
     // For the 'else' statements, unmarks the conflicting activites when the respective conflicting activity is unchecked (good)
+
     
+    
+    
+    //$h3.style.display = 'none';
+    
+
     const $checkedBoxSearch = $('.activities [type=checkbox]'); 
 
     $checkedBoxSearch.on('click', () => {
         
+        if ($($mainConference).prop('checked')) {
+            
+        }  else {
+            
+        }
+
         if ($($javascriptFrameworks).prop('checked')) {
+            
+            completeTotal += 100;
             $express.prop('disabled', true);
             activitiesLabel[3].style.color = 'gray';
-        } else {
+        }  else {
             $express.prop('disabled', false);
             activitiesLabel[3].style.color = 'black';   
         }
         
         if ($($javascriptLibraries).prop('checked'))  {
+            
             $node.prop('disabled', true);
             activitiesLabel[4].style.color = 'gray';
         } else {
@@ -108,6 +123,7 @@ $('#name').focus();
         }
         
         if ($($express).prop('checked')) {
+           
             $javascriptFrameworks.prop('disabled', true);
             activitiesLabel[1].style.color = 'gray';
         } else {
@@ -116,53 +132,46 @@ $('#name').focus();
         }
         
         if ($($node).prop('checked')) {
+            
             $javascriptLibraries.prop('disabled', true);
             activitiesLabel[2].style.color = 'gray';
         } else {
             $javascriptLibraries.prop('disabled', false);
             activitiesLabel[2].style.color = 'black';
         }
+
+        if ($($buildTools).prop('checked')) {
+            
+        }  
+
+        if ($($npm).prop('checked')) {
+            $h3.style.display = 'block';
+        }  
     });
-
-
 
     // Keep a running total of checked boxes so the total $ amount updates based upon selections
     // Select the dynamically added h3 element to display the running total cost
-    
-    
-    const activities = document.querySelector('.activities');
-    const $h3 = document.createElement('h3');
+    let activities = document.querySelector('.activities');
+    let $h3 = document.createElement('h3');
     activities.appendChild($h3);
+    let runningTotal = '';
 
-
-    // Function to capture running total in an array and display real-time total cost
-    let $runningTotal = [0];
-    const mainConferenceCost = 200;
-    const workshopCost = 100;
-    const totalCost = (accumulator, currentValue) => accumulator + currentValue;
-    const totalCostAdjust = (accumulator, currentValue) => accumulator - currentValue;
-    
-    $checkedBoxSearch.on('click', () => {
-        
-        if ($($mainConference).prop('checked')) {
-            accumulator = $runningTotal.push(mainConferenceCost);
-            currentValue = $runningTotal;
-            console.log('Total: $' + $runningTotal.reduce(totalCost));
-        } else {
-            $runningTotal.pop(mainConferenceCost);
-            console.log('Total: $' + $runningTotal.reduce(totalCostAdjust)); 
+    $('.activities').on('change', (e) => {
+        let checkbox = $(e.target).is(':checked');
+        console.log('checked = ' + checkbox);
+        let checkboxInput = e.target.parentNode;
+        const mainConference = 200;
+        const workshop = 100;
+        $h3.innerHTML = 'Total: $';
+        if (checkbox === true) {
+            runningTotal += 
         }
-
-        /*
-        if ($($javascriptFrameworks).prop('checked')) {
-            currentValue = $runningTotal.push(workshopCost);
-            console.log('Total: $' + $runningTotal.reduce(totalCost));
-        } else {
-            $runningTotal.pop(workshopCost);
-            console.log('Total: $' + $runningTotal.reduce(totalCostAdjust)); 
-        }
-        */
     });
+
+    
+
+        
+  
 
     
   
