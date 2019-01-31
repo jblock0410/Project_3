@@ -34,7 +34,6 @@ $('#name').focus();
     // Hide the 'Color' dropdown menu on page load
          $colorOption.hide();
         
-    
     // Reveals the 'Color' dropdown menu when the 'js puns' or 'heart js' 'Design' option is selected      
     // Changes the 'Color' dropdown menu to match the respective 'Design' option selected
     $($designOption).change(function() {
@@ -79,128 +78,127 @@ $('#name').focus();
     const $buildTools = $('.activities input[name="build-tools"]');
     const $npm = $('.activities input[name="npm"]');
 
-
     // Selects the label text for each of the activity options (good)
     const activitiesLabel = $('.activities label'); 
 
-
     // For the 'if' statements, when an activity is selected, sets it so the conflicting activity's checkbox is unavailable and visually indicates the workshop is not available (good)
     // For the 'else' statements, unmarks the conflicting activites when the respective conflicting activity is unchecked (good)
-
-    
-    
-    
-    //$h3.style.display = 'none';
-    
-
     const $checkedBoxSearch = $('.activities [type=checkbox]'); 
 
     $checkedBoxSearch.on('click', () => {
-        
-        if ($($mainConference).prop('checked')) {
-            
-        }  else {
-            
-        }
-
         if ($($javascriptFrameworks).prop('checked')) {
-            
-            completeTotal += 100;
             $express.prop('disabled', true);
             activitiesLabel[3].style.color = 'gray';
         }  else {
             $express.prop('disabled', false);
             activitiesLabel[3].style.color = 'black';   
-        }
-        
+            }
         if ($($javascriptLibraries).prop('checked'))  {
-            
             $node.prop('disabled', true);
             activitiesLabel[4].style.color = 'gray';
         } else {
             $node.prop('disabled', false);
             activitiesLabel[4].style.color = 'black';  
-        }
-        
+            }
         if ($($express).prop('checked')) {
-           
             $javascriptFrameworks.prop('disabled', true);
             activitiesLabel[1].style.color = 'gray';
         } else {
             $javascriptFrameworks.prop('disabled', false);
             activitiesLabel[1].style.color = 'black';
-        }
-        
+            }
         if ($($node).prop('checked')) {
-            
             $javascriptLibraries.prop('disabled', true);
             activitiesLabel[2].style.color = 'gray';
         } else {
             $javascriptLibraries.prop('disabled', false);
             activitiesLabel[2].style.color = 'black';
-        }
-
-        if ($($buildTools).prop('checked')) {
-            
-        }  
-
-        if ($($npm).prop('checked')) {
-            $h3.style.display = 'block';
-        }  
+            } 
     });
 
-    // Keep a running total of checked boxes so the total $ amount updates based upon selections
-    // Select the dynamically added h3 element to display the running total cost
+
+
+
+
+// Keep a running total of checked boxes so the total $ amount updates based upon selections (good)
+    
+    // Dynamically create and add an h3 element to display the running total cost upon checkbox click
     let activities = document.querySelector('.activities');
     let $h3 = document.createElement('h3');
     activities.appendChild($h3);
-    let runningTotal = '';
+    $h3.className = 'total';
 
-    $('.activities').on('change', (e) => {
-        let checkbox = $(e.target).is(':checked');
-        console.log('checked = ' + checkbox);
-        let checkboxInput = e.target.parentNode;
-        const mainConference = 200;
-        const workshop = 100;
-        $h3.innerHTML = 'Total: $';
-        if (checkbox === true) {
-            runningTotal += 
-        }
+    // Select all of the checkbox input items
+    const checkedInputBox = $('input:checkbox');
+
+    // Checks to see if the first checkbox is selected (Main Conference) because it has a higher value (cost) than the other selections
+    checkedInputBox.each(function(index, element) {
+        if (index === 0) {
+            $(element).prop('value', 200);
+        } else {
+            $(element).prop('value', 100);
+        }   
+    });
+
+    // Sets the initial total amount to zero
+    // Listens for a click on checkbox(es) and adds the corresponding value (cost) to the running total amount in the h3
+    checkedInputBox.on('change', function() {
+        let totalAmount = 0;
+        checkedInputBox.each(function() {
+            if ($(this).is(':checked')) {
+                totalAmount += Number($(this).val());
+            }
+        });
+        $('.total').text(`Total: $${totalAmount}`);
     });
 
     
 
         
-  
-
-    
-  
-    
-    
-    
-   
-
-
-
-    
-
 
 // Payment Info Section
     // Make payment section change to match the selected payment method option
+    const $paymentOption = document.getElementById('payment');
 
+    // Initially hide the paypal and bitcoin payment sections to make the credit card option the default
+    $('#paypal').hide();
+    $('#bitcoin').hide();
 
-    // Make credit card option the default
-    // Display the #credit-card div, and hide the PayPal and Bitcoin info
+    // Function to change the visible payment section to match the dropdown payment method selection
+    $paymentOption.addEventListener('change', (e) => {
+        let paymentSelection = e.target.value;
+            if (paymentSelection === 'credit card') {
+                // Once a payment method is selected, the 'Select Payment Method' option in the dropdown menu disappears
+                $('#payment option[value="select_method"]').hide(); 
+                $('#credit-card').slideDown(1000);
+                $('#paypal').hide();
+                $('#bitcoin').hide();
+            } else if (paymentSelection === 'paypal') {
+                $('#payment option[value="select_method"]').hide();
+                $('#credit-card').hide();
+                $('#paypal').slideDown(1000);
+                $('#bitcoin').hide();
+            } else if (paymentSelection === 'bitcoin') {
+                $('#payment option[value="select_method"]').hide();
+                $('#credit-card').hide();
+                $('#paypal').hide();
+                $('#bitcoin').slideDown(1000);
+            }
+        
+    });
 
+    // Ensure a payment method is selected  
+    // Set so if "Select Payment Method" is chosen, the form will not submit and an alert message appears
+    const button = document.querySelector('button');
+    const noPaymentOption = $('#payment option[value="select_method"]');
 
-    // Make PayPal info display when selected, hide others
-
-
-    // Make Bitcoin info display when selected, hide others
-
-
-    // Ensure a payment method is selected.  Set so if "Select Payment Method" is chosen, the form won't submit
-    // Ensure there is an error message for this
+    button.addEventListener('click', () => { 
+        if (noPaymentOption) {
+            alert('Please select a valid payment option.');
+        } else {
+            alert('Everything works!');
+        }
+    });
 
 
 
