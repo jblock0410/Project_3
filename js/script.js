@@ -156,11 +156,14 @@ $('#name').focus();
 
         
 
-// Payment Info Section
+// Payment Info Section (good)
     // Make payment section change to match the selected payment method option
     const $paymentOption = document.getElementById('payment');
 
-    // Initially hide the paypal and bitcoin payment sections to make the credit card option the default
+    // Make the credit card option the default payment method
+    $('#payment option[value="credit card"]').selected = true;
+
+    // Initially hide the paypal and bitcoin payment sections 
     $('#paypal').hide();
     $('#bitcoin').hide();
 
@@ -168,83 +171,114 @@ $('#name').focus();
     $paymentOption.addEventListener('change', (e) => {
         let paymentSelection = e.target.value;
             if (paymentSelection === 'credit card') {
-                // Once a payment method is selected, the 'Select Payment Method' option in the dropdown menu disappears
-                $('#payment option[value="select_method"]').hide(); 
                 $('#credit-card').slideDown(1000);
                 $('#paypal').hide();
                 $('#bitcoin').hide();
             } else if (paymentSelection === 'paypal') {
-                $('#payment option[value="select_method"]').hide();
                 $('#credit-card').hide();
                 $('#paypal').slideDown(1000);
                 $('#bitcoin').hide();
             } else if (paymentSelection === 'bitcoin') {
-                $('#payment option[value="select_method"]').hide();
                 $('#credit-card').hide();
                 $('#paypal').hide();
                 $('#bitcoin').slideDown(1000);
             }
-        
     });
 
-    // Ensure a payment method is selected  
-    // Set so if "Select Payment Method" is chosen, the form will not submit and an alert message appears
-    const button = document.querySelector('button');
-    const noPaymentOption = $('#payment option[value="select_method"]');
-
-    button.addEventListener('click', () => { 
-        if (noPaymentOption) {
-            alert('Please select a valid payment option.');
-        } else {
-            alert('Everything works!');
-        }
-    });
-
+   
 
 
 
 // Form Validation
     // Prevent the user from submitting the form in the following situations:
+    let validInfo = true;
+    function totalFormValidation() {
+
         // Name field can't be blank
-        
-        // Email field must be a properly vaild format
+        let nameInput = $('#name').val();
+        if (validName(nameInput) === false) {
+            $('#name').css('border-color', 'red');
+            setTimeout(function() {alert('Please enter your full name.');}, 500);
+            validInfo = false;
+        }
+
+        // Email field must be a properly valid format
+            // The '(type="email")' attribute automatically ensures a proper email format
+        let emailInput = $('#mail').val();
+        if (validEmail(emailInput) === false) {
+            $('#mail').css('border-color', 'red');
+            validInfo = false;  
+        }
 
         // At least one checkbox in Register for Activities must be selected
-
+        let validActivities = $('.total');
+        if (validActivities === 0) {
+            setTimeout(function() {alert('Please select at least one activity.');}, 500);
+            validInfo = false;
+        }
+    
         // For credit card option, require a credit card number, zip code, and CVV code
+        // Ensure the credit card info is only validated if Credit Card is the selected payment method
+        // Indicate when there is a validation error (red field borders, red text message)
+        let creditCardNumber = $('#cc-num').val();
+        let zipCode = $('#zip').val();
+        let cvv = $('#cvv').val();
+
             // Credit card only accepts a number between 13-16 digits
-
-            // Zip Code only accepts a 5 digit number
-
-            // The CVV only acceptsa 3 digit number
-
-
-    // Ensure the each area is validated (or checked) for proper format.  Throw error if not.
-    // Ensure the credit card info is only validated if Credit Card is the selected payment method
+            if ($paymentOption.value === 'credit card') {
+                if (validCreditCardNumber(creditCardNumber) === false) {
+                    $('#cc-num').css('border-color', 'red');
+                    setTimeout(function() {alert('Please enter a valid credit card number between 13 - 16 digits.');}, 500);
+                    validInfo = false;
+                }
+                // Zip Code only accepts a 5 digit number
+                if (validZipCode(zipCode) === false) {
+                    $('#zip').css('border-color', 'red');
+                    setTimeout(function() {alert('Please enter a valid 5-digit zip code.');}, 500);
+                    validInfo = false;
+                    }
+                // The CVV only acceptsa 3 digit number
+                if (validCvv(cvv) === false) {
+                    $('#zip').css('border-color', 'red');
+                    setTimeout(function() {alert('Please enter a valid CVV.');}, 500);
+                    validInfo = false;
+                }
+            }; 
+            return validInfo;
+        };        
 
 
 
 
 
 // Form validation messages
-    // Indicate when there is a validation error (red field borders, red text message)
     // Check default behavior - only display messages after user interaction/submission
     
     // Add error indication to these fields:
         // Name
-
+        function validName(nameInput) {
+            return /^[A-Za-z][A-Za-z\s]+$/i.test(nameInput);
+        }
         // Email
-
+        function validEmail(emailInput) {
+            return / /.test(emailInput);
+        }
         // At least one check in Register for Activities
-
+                //validActivities **************************************************
         // Credit Card number (only if the payment method is selected)
-
+        function validCreditCardNumber(creditCardNumber) {
+            return /   /.test(creditCardNumber);
+        }
         // Zip Code (only if credit card method is selected)
-
+        function validZipCode(zipCode) {
+            return /^\d{5}$/.test(zipCode);
+        }
         // CVV (only if credit card method is selected)
-
-
-
+        function validCvv(cvv) {
+            return /^\d{3}$ /.test(cvv);
+        }
+        // Validation of complete form format and information
+        totalFormValidation()
 
 
 // Progressive Enhancement - ensure form works without JavaScript
